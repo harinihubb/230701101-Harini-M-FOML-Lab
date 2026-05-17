@@ -1,0 +1,119 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "wZ5gZnOtPkqR",
+        "outputId": "9a018962-7233-444c-8451-a1cefac5cc3c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy: 1.0\n",
+            "Predicted: [1 0 2 1 1 0 1 2 1 1]\n",
+            "Actual   : [1 0 2 1 1 0 1 2 1 1]\n"
+          ]
+        }
+      ],
+      "source": [
+        "from sklearn.datasets import load_iris\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.neighbors import KNeighborsClassifier\n",
+        "from sklearn.metrics import accuracy_score\n",
+        "\n",
+        "# Load dataset\n",
+        "data = load_iris()\n",
+        "X = data.data\n",
+        "y = data.target\n",
+        "\n",
+        "# Split dataset\n",
+        "X_train, X_test, y_train, y_test = train_test_split(\n",
+        "    X, y, test_size=0.2, random_state=42)\n",
+        "\n",
+        "# Create KNN model\n",
+        "model = KNeighborsClassifier(n_neighbors=3)\n",
+        "\n",
+        "# Train model\n",
+        "model.fit(X_train, y_train)\n",
+        "\n",
+        "# Predict\n",
+        "y_pred = model.predict(X_test)\n",
+        "\n",
+        "# Accuracy\n",
+        "print(\"Accuracy:\", accuracy_score(y_test, y_pred))\n",
+        "print(\"Predicted:\", y_pred[:10])\n",
+        "print(\"Actual   :\", y_test[:10])"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.datasets import load_iris\n",
+        "from sklearn.cluster import KMeans\n",
+        "\n",
+        "# Load dataset\n",
+        "data = load_iris()\n",
+        "X = data.data\n",
+        "\n",
+        "# Create KMeans model\n",
+        "model = KMeans(n_clusters=3, random_state=42)\n",
+        "\n",
+        "# Fit model\n",
+        "model.fit(X)\n",
+        "\n",
+        "# Output\n",
+        "print(\"Cluster Labels:\")\n",
+        "print(model.labels_)\n",
+        "\n",
+        "print(\"Cluster Centers:\")\n",
+        "print(model.cluster_centers_)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RhYW-G7UPr4p",
+        "outputId": "bd4662c1-083b-40aa-d00c-bc1193f0b826"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Cluster Labels:\n",
+            "[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n",
+            " 1 1 1 1 1 1 1 1 1 1 1 1 1 0 2 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2\n",
+            " 2 2 2 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 0 0 0 0 2 0 0 0 0\n",
+            " 0 0 2 2 0 0 0 0 2 0 2 0 2 0 0 2 2 0 0 0 0 0 2 0 0 0 0 2 0 0 0 2 0 0 0 2 0\n",
+            " 0 2]\n",
+            "Cluster Centers:\n",
+            "[[6.85384615 3.07692308 5.71538462 2.05384615]\n",
+            " [5.006      3.428      1.462      0.246     ]\n",
+            " [5.88360656 2.74098361 4.38852459 1.43442623]]\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
